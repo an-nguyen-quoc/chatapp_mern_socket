@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { Box, Typography, TextField, Button, Alert } from '@mui/material';
 import { login } from '../api/user';
 import { useNavigate } from 'react-router-dom';
+import { useChat } from '../context/ChatContext';
 
 const Login = () => {
   const [values, setValues] = React.useState({
@@ -14,11 +15,18 @@ const Login = () => {
   const [success, setSuccess] = React.useState(false);
 
   const navigate = useNavigate();
+  const { user, setUser } = useChat();
 
   const handleChange = (event) => {
     const { name, value } = event.target;
     setValues({ ...values, [name]: value });
   };
+
+  useEffect(() => {
+    if (user) {
+      navigate('/chats');
+    }
+  }, []);
 
   useEffect(() => {
     setTimeout(() => {

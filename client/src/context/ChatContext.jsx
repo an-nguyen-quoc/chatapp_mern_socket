@@ -14,6 +14,7 @@ const ChatProvider = ({ children }) => {
 
   const logout = () => {
     localStorage.removeItem('userInfo');
+    setUser(null);
     navigate('/');
   };
 
