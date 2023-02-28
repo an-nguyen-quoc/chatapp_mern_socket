@@ -14,6 +14,7 @@ import { useChat } from '../context/ChatContext';
 import { showToast } from './Toast';
 import UserBadgeItem from './UserBadgeItem';
 import UserListItem from './UserListItem';
+import ApiConfig from '../config';
 
 const GroupChatModal = ({ children }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -47,7 +48,10 @@ const GroupChatModal = ({ children }) => {
           Authorization: `Bearer ${user.token}`,
         },
       };
-      const { data } = await axios.get(`/api/user?search=${search}`, config);
+      const { data } = await axios.get(
+        `${ApiConfig.API_ENDPOINT}/api/user?search=${search}`,
+        config
+      );
       setLoading(false);
       setSearchResult(data);
     } catch (error) {
@@ -72,7 +76,7 @@ const GroupChatModal = ({ children }) => {
         },
       };
       const { data } = await axios.post(
-        `/api/chat/group`,
+        `${ApiConfig.API_ENDPOINT}/api/chat/group`,
         {
           name: groupChatName,
           users: JSON.stringify(selectedUsers.map((u) => u._id)),

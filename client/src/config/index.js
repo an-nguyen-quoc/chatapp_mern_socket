@@ -1,5 +1,6 @@
 const config = {
-  SOCKET_ENDPOINT: import.meta.env.VITE_SOCKET_ENDPOINT,
+  SOCKET_ENDPOINT: 'https://chatapp-mern-eqyx.onrender.com/',
+  API_ENDPOINT: 'https://chatapp-mern-eqyx.onrender.com',
 };
 
 export default config;

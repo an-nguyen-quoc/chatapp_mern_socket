@@ -18,9 +18,9 @@ import {
 } from '@mui/material';
 import ScrollableChat from './ScrollableChat';
 
-import config from '../config';
+import ApiConfig from '../config';
 
-const ENDPOINT = config.SOCKET_ENDPOINT; // "https://talk-a-tive.herokuapp.com"; -> After deployment
+const ENDPOINT = ApiConfig.SOCKET_ENDPOINT; // "https://talk-a-tive.herokuapp.com"; -> After deployment
 let socket, selectedChatCompare;
 
 const SingleChat = ({ fetchAgain, setFetchAgain }) => {
@@ -60,7 +60,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
       setLoading(true);
 
       const { data } = await axios.get(
-        `/api/message/${selectedChat._id}`,
+        `${ApiConfig.API_ENDPOINT}/api/message/${selectedChat._id}`,
         config
       );
       setMessages(data);
@@ -84,7 +84,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
         };
         setNewMessage('');
         const { data } = await axios.post(
-          '/api/message',
+          `${ApiConfig.API_ENDPOINT}/api/message`,
           {
             content: newMessage,
             chatId: selectedChat,

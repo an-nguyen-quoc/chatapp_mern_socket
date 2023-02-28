@@ -6,8 +6,6 @@ import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Chat from './pages/Chats';
 import './App.css';
-import { blue } from '@mui/material/colors';
-import { showToast } from './components/Toast';
 import Toast from './components/Toast';
 
 const theme = createTheme({
@@ -21,6 +19,7 @@ const theme = createTheme({
       hover: '#EAEDF0',
     },
     white: '#FFFFFF',
+    mode: 'light',
   },
 });
 

@@ -6,7 +6,6 @@ import {
   Tooltip,
   Button,
   Typography,
-  Drawer,
   TextField,
 } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
@@ -19,6 +18,7 @@ import UserListItem from './UserListItem';
 import GroupChatModal from './GroupChatModal';
 import GroupAddIcon from '@mui/icons-material/GroupAdd';
 import MyChats from './MyChats';
+import ApiConfig from '../config';
 
 const ConversationTab = ({ fetchAgain }) => {
   const theme = useTheme();
@@ -52,7 +52,10 @@ const ConversationTab = ({ fetchAgain }) => {
           Authorization: `Bearer ${user.token}`,
         },
       };
-      const res = await axios.get(`api/user?search=${search}`, config);
+      const res = await axios.get(
+        `${ApiConfig.API_ENDPOINT}/api/user?search=${search}`,
+        config
+      );
 
       setSearchResult(res.data);
       setLoading(false);
@@ -71,7 +74,11 @@ const ConversationTab = ({ fetchAgain }) => {
           Authorization: `Bearer ${user.token}`,
         },
       };
-      const { data } = await axios.post(`api/chat`, { userId: id }, config);
+      const { data } = await axios.post(
+        `${ApiConfig.API_ENDPOINT}/api/chat`,
+        { userId: id },
+        config
+      );
       if (!chats.find((chat) => chat._id === data._id)) {
         setChats([...chats, data]);
       }

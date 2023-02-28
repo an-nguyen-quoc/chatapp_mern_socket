@@ -1,6 +1,7 @@
 const express = require('express');
 const dotenv = require('dotenv');
 const path = require('path');
+const cors = require('cors');
 const connectDB = require('./config/db');
 
 const userRoutes = require('./routes/users');
@@ -13,6 +14,12 @@ dotenv.config();
 connectDB();
 const app = express();
 
+var corsOptions = {
+  origin: 'https://chatapp-mern-front-end.onrender.com',
+  optionsSuccessStatus: 200,
+};
+app.use(cors(corsOptions));
+
 app.use(express.urlencoded());
 app.use(express.json());
 
@@ -24,7 +31,12 @@ app.use('/api/message', messageRoutes);
 
 const __dir = path.resolve();
 if (process.env.NODE_ENV === 'production') {
-  app.use(express.static(path.join(__dir, '/client/dist')));
+  app.use(
+    '/',
+    express.static(path.join(__dir, '/client/dist'), {
+      extensions: ['js', 'css'],
+    })
+  );
   app.get('*', (req, res) =>
     res.sendFile(path.resolve(__dir, 'client', 'dist', 'index.html'))
   );
@@ -47,7 +59,7 @@ const server = app.listen(PORT, () => {
 
 const io = require('socket.io')(server, {
   cors: {
-    origin: 'http://192.168.1.102:3000',
+    origin: 'https://chatapp-mern-front-end.onrender.com',
     methods: ['GET', 'POST'],
   },
   pingTimeout: 60000,

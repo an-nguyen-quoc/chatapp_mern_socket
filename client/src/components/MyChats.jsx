@@ -10,6 +10,7 @@ import { getSender } from '../config/ChatLogics';
 import { useTheme } from '@mui/material/styles';
 import { useNavigate } from 'react-router-dom';
 import ChatItem from './ChatItem';
+import ApiConfig from '../config';
 
 const MyChatContainer = styled('div')(({ theme, selectedChat }) => ({
   flexDirection: 'column',
@@ -39,7 +40,10 @@ const MyChats = ({ fetchAgain }) => {
           Authorization: `Bearer ${user.token}`,
         },
       };
-      const { data } = await axios.get('/api/chat', config);
+      const { data } = await axios.get(
+        `${ApiConfig.API_ENDPOINT}/api/chat`,
+        config
+      );
 
       setChats(data);
     } catch (error) {
