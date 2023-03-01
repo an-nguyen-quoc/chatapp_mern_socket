@@ -50,6 +50,22 @@ const Login = () => {
     }
   };
 
+  const handleGuestLogin = async (event) => {
+    event.preventDefault();
+    try {
+      setIsLoading(true);
+      await login({ email: 'guest@test.com', password: 'guest' });
+      setSuccess(true);
+      setTimeout(() => {
+        navigate('/chats');
+      });
+    } catch (error) {
+      setError(['Invalid email or password']);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return (
     <div
       style={{
@@ -121,9 +137,17 @@ const Login = () => {
           Login
         </Button>
 
-        <Typography variant="body1" component="p">
-          Don't have an account yet? <a href="/signup">Sign up</a>
-        </Typography>
+        <Button
+          variant="contained"
+          onClick={handleGuestLogin}
+          style={{
+            fontSize: '1rem',
+            fontWeight: 'bold',
+          }}
+          disabled={isLoading}
+        >
+          Login as guest user
+        </Button>
       </Box>
     </div>
   );
