@@ -103,7 +103,7 @@ const Signup = () => {
       {success && <Alert severity="success">Create account successfully</Alert>}{' '}
       <Box>
         <Typography variant="h4" component="h4">
-          Join TikTalk
+          Sign up
         </Typography>
       </Box>
       <form

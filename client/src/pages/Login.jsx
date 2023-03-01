@@ -69,7 +69,7 @@ const Login = () => {
       {success && <Alert severity="success">Login successful</Alert>}{' '}
       <Box>
         <Typography variant="h4" component="h4">
-          Sign in TikTalk
+          Sign in
         </Typography>
       </Box>
       <Box
